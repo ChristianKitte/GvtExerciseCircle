@@ -21,26 +21,29 @@ function getVerticesPointsArray() {
      */
     LineVertices = new Float32Array([]);
 
-    let countLineSegments = 1000;
+    let n = 10;
 
-    let dt = 2 * Math.PI / countLineSegments;
-    let t = 0;
-    let radius = 50;
+    var dt = 2*Math.PI / n;
+    var t = 0;
+    var r = 50.0;
 
     /**
      * Füllt alle benötigten Array mit den Positionen und Farbwerten der Vertices.
      */
-    for (let i = 0; i <= countLineSegments; i++, t += dt) {
-        let x = radius * Math.cos(t);
-        let y = radius * Math.sin(t);
+    for (let i = 0; i <= n;) {
+        t = t + dt;
+        i++;
+        var x = r * Math.cos(t);
+        var y = r * Math.sin(t);
 
         /**
          * Punkte und Farbe der nächsten Punkte der Sinuswelle ausgeben
          */
+        pushLine(x);
         pushLine(y);
         pushLine(1.0, 0.0, 0.0, 1);
-        pushLine(x);
-        pushLine(1.0, 0.0, 0.0, 1);
+
+
     }
 }
 
@@ -72,7 +75,7 @@ function RefreshWave() {
 
     // Ausgabe Nullinie...
     gl.bufferData(gl.ARRAY_BUFFER, LineVertices, gl.STATIC_DRAW);
-    gl.drawArrays(gl.LINES, 0, LineVertices.length / 6);
+    gl.drawArrays(gl.LINE_STRIP, 0, LineVertices.length / 6);
 }
 
 /**
