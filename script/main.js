@@ -42,8 +42,6 @@ function getVerticesPointsArray() {
         pushLine(x);
         pushLine(y);
         pushLine(1.0, 0.0, 0.0, 1);
-
-
     }
 }
 

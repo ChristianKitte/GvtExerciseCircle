@@ -23,7 +23,7 @@ function getContext(redVal, greenVal, blueVal, alphaVal) {
     const gl = canvas.getContext('webgl2');
     gl.viewportWidth = canvas.width;
     gl.viewportHeight = canvas.height;
-    gl.viewport(-600, -100, gl.canvas.width + 400, gl.canvas.height + 200);
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
     gl.clearColor(0.9, 0.9, 0.9, 1);//RGB der Hintergrundfarbe
 
