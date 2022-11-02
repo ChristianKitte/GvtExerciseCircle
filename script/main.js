@@ -23,9 +23,9 @@ function getVerticesPointsArray() {
 
     let n = 10;
 
-    var dt = 2*Math.PI / n;
-    var t = 0;
-    var r = 50.0;
+    let dt = 2 * Math.PI / n;
+    let t = 0;
+    let r = 45.0;
 
     /**
      * Füllt alle benötigten Array mit den Positionen und Farbwerten der Vertices.
@@ -33,8 +33,8 @@ function getVerticesPointsArray() {
     for (let i = 0; i <= n;) {
         t = t + dt;
         i++;
-        var x = r * Math.cos(t);
-        var y = r * Math.sin(t);
+        let x = r * Math.cos(t);
+        let y = r * Math.sin(t);
 
         /**
          * Punkte und Farbe der nächsten Punkte der Sinuswelle ausgeben
