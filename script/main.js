@@ -21,27 +21,44 @@ function getVerticesPointsArray() {
      */
     LineVertices = new Float32Array([]);
 
-    let n = 10;
+    let n = 150;
 
     let dt = 2 * Math.PI / n;
     let t = 0;
-    let r = 45.0;
+    //let r = 0;
+
+    let x = 0.0;
+    let y = 0.0;
+    let z = 0.0;
 
     /**
      * Füllt alle benötigten Array mit den Positionen und Farbwerten der Vertices.
      */
-    for (let i = 0; i <= n;) {
-        t = t + dt;
-        i++;
-        let x = r * Math.cos(t);
-        let y = r * Math.sin(t);
+    for (let rt = 0; rt < 45; rt = rt + 5) {
+        t = 0;
 
-        /**
-         * Punkte und Farbe der nächsten Punkte der Sinuswelle ausgeben
-         */
-        pushLine(x);
-        pushLine(y);
-        pushLine(1.0, 0.0, 0.0, 1);
+        for (let i = 0; i <= n;) {
+            t = t + dt;
+            i++;
+
+            x = rt * Math.cos(t);
+            y = rt * Math.sin(t);
+            z = 0;
+
+            /**
+             * Punkte und Farbe der nächsten Punkte der Sinuswelle ausgeben
+             */
+            if(i>0){
+                pushLine(LineVertices[i-3]);
+                pushLine(LineVertices[i-2]);
+                pushLine(LineVertices[i-1]);
+                pushLine(1.0, 0.0, 0.0, 1);
+            }
+            pushLine(x);
+            pushLine(y);
+            pushLine(z);
+            pushLine(1.0, 0.0, 0.0, 1);
+        }
     }
 }
 
@@ -65,15 +82,15 @@ function RefreshWave() {
     gl.enableVertexAttribArray(aColor);
 
     // Zeiger erzeugen und konfigurieren
-    gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 6 * 4, 0);
-    gl.vertexAttribPointer(aColor, 4, gl.FLOAT, false, 6 * 4, 2 * 4);
+    gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 7 * 4, 0);
+    gl.vertexAttribPointer(aColor, 4, gl.FLOAT, false, 7 * 4, 3 * 4);
 
     // alte Ausgabe löschen
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     // Ausgabe Nullinie...
     gl.bufferData(gl.ARRAY_BUFFER, LineVertices, gl.STATIC_DRAW);
-    gl.drawArrays(gl.LINE_STRIP, 0, LineVertices.length / 6);
+    gl.drawArrays(gl.LINES, 0, LineVertices.length / 7);
 }
 
 /**

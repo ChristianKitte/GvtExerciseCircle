@@ -4,7 +4,7 @@
  */
 const vertexShaderSource = `#version 300 es  
     
-    in vec2 aPosition;
+    in vec3 aPosition;
     in vec4 aColor;
     
     out vec4 vColor;
@@ -14,7 +14,7 @@ const vertexShaderSource = `#version 300 es
         vColor = vec4(aColor);
         //vColor=vec4(0,1,0,1);
         
-        gl_Position=vec4(aPosition, 0.0,50.0);
+        gl_Position=vec4(aPosition,50.0);
         gl_PointSize=1.0;     
     }
 `;
