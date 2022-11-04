@@ -46,4 +46,3 @@ function pushWave() {
     WaveVertices = new Float32Array([...WaveVertices, ...arguments]);
 }
 
-

@@ -21,43 +21,50 @@ function getVerticesPointsArray() {
      */
     LineVertices = new Float32Array([]);
 
-    let n = 150;
+    let n = 40;
+    let m = 10;
 
     let dt = 2 * Math.PI / n;
-    let t = 0;
-    //let r = 0;
+    let dr = 1;
 
-    let x = 0.0;
-    let y = 0.0;
-    let z = 0.0;
-
+    let xAlt = 0;
+    let yAlt = 0;
+    let zAlt = 0;
     /**
      * Füllt alle benötigten Array mit den Positionen und Farbwerten der Vertices.
      */
-    for (let rt = 0; rt < 45; rt = rt + 5) {
-        t = 0;
-
-        for (let i = 0; i <= n;) {
-            t = t + dt;
-            i++;
-
-            x = rt * Math.cos(t);
-            y = rt * Math.sin(t);
-            z = 0;
+    for (let i = 0, t = 0; i <= n; i++, t += dt) { // Kreis
+        for (let j = 0, r = 0; j <= m; j++, r += dr) { // Strahlen
+            let x = r * Math.cos(t);
+            let y = r * Math.sin(t);
+            let z = 0;
 
             /**
              * Punkte und Farbe der nächsten Punkte der Sinuswelle ausgeben
              */
-            if(i>0){
-                pushLine(LineVertices[i-3]);
-                pushLine(LineVertices[i-2]);
-                pushLine(LineVertices[i-1]);
+            if (xAlt !== 0) {
+                pushLine(xAlt);
+                pushLine(yAlt);
+                pushLine(zAlt);
                 pushLine(1.0, 0.0, 0.0, 1);
             }
+
             pushLine(x);
             pushLine(y);
             pushLine(z);
             pushLine(1.0, 0.0, 0.0, 1);
+
+            /**
+             * Kreislinie 1
+             */
+
+
+            /**
+             * Punkte sichern
+             */
+            xAlt = x;
+            yAlt = y;
+            zAlt = z;
         }
     }
 }
